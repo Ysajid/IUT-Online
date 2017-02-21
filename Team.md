@@ -7,5 +7,5 @@
   * UI Design
   * Implemetation
 * Backend
-  * DB Design
+  * Designing Models and Views
 * Technical Writing and Documentation
