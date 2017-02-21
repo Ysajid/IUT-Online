@@ -14,3 +14,7 @@ An online platform to facilitate all the interactions between students, faculty 
 * Online notice board
 * Push notification
   * Exams and quizes
+
+## Inspirations
+* Google Classroom http://classroom.google.com/
+* 
