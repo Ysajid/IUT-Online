@@ -16,5 +16,6 @@ An online platform to facilitate all the interactions between students, faculty 
   * Exams and quizes
 
 ## Inspirations
-* Google Classroom http://classroom.google.com/
-* 
+* Google Classroom http://classroom.google.com
+* Scoology https://www.schoology.com
+* Edomodo https://www.edmodo.com
