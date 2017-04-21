@@ -11,7 +11,7 @@
 
 ## Sectors
  * UI-UX Research  
- Need to check out currently available other sites like [Google Classroom](), [Endomodo]() and have a general idea about how it should be structured. Also inspirations can be taken from sites like [Pinterest](), [Dribbble]() etc.
+ Need to check out currently available other sites like [Google Classroom](classroom.google.com), [Endomodo]() and have a general idea about how it should be structured. Also inspirations can be taken from sites like [Pinterest](pinterest.com), [Dribbble](dribble.com) etc.
    * Wireframing 
    * Color Scheme
  * Documentation
