@@ -1,0 +1,55 @@
+{% extends 'base.html' %} {% block content %}
+
+
+<!--<div class="container">-->
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+		{% if form.errors %}
+
+		<p class="text-danger">Your username and password didn't match. Please try again.</p>
+		{% endif %} {% if next %} {% if user.is_authenticated %}
+
+		<p class="text-danger">Your account doesn't have access to this page. To proceed, please login with an account that has access.</p>
+		{% else %}
+
+		<p class="text-danger">Please login to see this page.</p>
+		{% endif %} {% endif %}
+		<div class="login-panel panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Please Sign In</h3>
+			</div>
+			<div class="panel-body">
+				<form method="post">
+					{% csrf_token %}
+					<div class="input-group">
+						<span class="input-group-addon" id="user-icon">@</span>
+						<input id="username_fld" placeholder='{{ form.username.label }}' type="text" name='{{ form.username.name }}' class="form-control"
+							aria-describedby="usesr-icon" />
+					</div>
+					<br/>
+					<div class="input-group">
+						<span class="input-group-addon" id="password-icon">@</span>
+						<input id="password_fld" placeholder='{{ form.password.label }}' type="password" name='{{ form.password.name }}' class="form-control"
+							aria-describedby="password-icon">
+					</div>
+					<br/>
+					<input class="btn btn-primary btn-block" type="submit" value="Login" />
+					<input type="hidden" name="next" value="{{ next }}" />
+				</form>
+			</div>
+			<div class="panel-footer">
+				<a href="{% url 'register' %}" class="btn btn-info btn-block" type="submit">New User?</a>
+			</div>
+		</div>
+	</div>
+	<!--</div>-->
+</div>
+
+{% endblock %} {% block javascript %}
+
+
+<script>
+{% if not user.is_authenticated %}
+    $("ul.nav.navbar-nav.navbar-right").css("display","none");
+{% endif %}
+</script> {% endblock %}

@@ -1,0 +1,15 @@
+{
+  "name": "iut_online",
+  "version": "1.0.0",
+  "description": "A website for iut",
+  "main": "index.js",
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
