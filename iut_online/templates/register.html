@@ -1,0 +1,127 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+<!--<div class="container">-->
+	<div class="row">
+		<h2>Create Your Account</h2>
+
+		<form class="form-horizontal" action="{% url 'register' %}" method="POST">
+			{% csrf_token %}
+			<fieldset>
+
+				<!-- Form Name -->
+				<legend>Register Here</legend>
+
+				<!-- Text input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="textinput">Name</label>
+					<div class="col-md-3">
+						<input id="textinput" name="first_name" placeholder="First Name" class="form-control input-md" required="" type="text">
+						<span class="help-block"> </span>
+					</div>
+					<div class="col-md-3">
+						<input id="textinput" name="last_name" placeholder="Last Name" class="form-control input-md" required="" type="text">
+						<span class="help-block"> </span>
+					</div>
+				</div>
+
+				<!-- Text input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="textinput">Father's Name</label>
+					<div class="col-md-6">
+						<input id="textinput" name="father's_name" placeholder="Insert your Father's Name" class="form-control input-md" required="" type="text">
+						<span class="help-block"> </span>
+					</div>
+				</div>
+
+				<!-- Text input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="textinput">Present Address</label>
+					<div class="col-md-6">
+						<textarea id="textinput" name="present_address" placeholder="Insert your present address" class="form-control textarea" required=""></textarea>	
+						<span class="help-block"> </span>
+					</div>
+				</div>
+
+				<!-- Text input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="textinput">Permanent Address</label>
+					<div class="col-md-6">
+						<textarea id="textinput" name="permanent_address" placeholder="Insert your permanent address" class="form-control textarea" required=""></textarea>
+						<span class="help-block"> </span>
+					</div>
+				</div>
+
+				<!-- Text input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="textinput">Addmission Year</label>
+					<div class="col-md-2">
+						<input id="textinput" name="addmission_year" placeholder="Addmission Year" class="form-control input-md" required="" type="number" value="2014">
+						<span class="help-block"> </span>
+					</div>
+					<label class="col-md-2 control-label" for="textinput">Semester</label>
+					<div class="col-md-2">
+						<input id="textinput" name="cur_semester" placeholder="Semester" class="form-control input-md" required="" type="number" value="1" aria-valuemax="8">
+						<span class="help-block"> </span>
+					</div>
+				</div>
+
+				<!-- Select input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="textinput">Department</label>
+					<div class="col-md-6">
+						<select id="textinput" name="department" class="form-control input-md" required="">
+                            {% for dept in depts %}
+                                <option value="{{ dept.pk }}">{{ dept.name }}</option>
+                            {% endfor %}
+                        </select>
+						<span class="help-block"> </span>
+					</div>
+				</div>
+
+				<!-- Select input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="textinput">Program</label>
+					<div class="col-md-6">
+						<select id="textinput" name="program" class="form-control input-md" required="">
+                            {% for program in progs %}
+                                <option value="{{ program.pk }}">{{ program.name }} ({{program.year}} years)</option>
+                            {% endfor %}
+                        </select>
+						<span class="help-block"> </span>
+					</div>
+				</div>
+                
+
+				<!-- Password input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="textinput">Password</label>
+					<div class="col-md-4">
+						<input id="textinput" name="password" placeholder="Insert your Password" class="form-control input-md" required="" type="password">
+						<span class="help-block"> </span>
+					</div>
+				</div>
+
+				<!-- Password input-->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="textinput">Confirm Password</label>
+					<div class="col-md-4">
+						<input id="textinput" name="textinput" placeholder="Confirm your Password" class="form-control input-md" required="" type="password">
+						<span class="help-block"> </span>
+					</div>
+				</div>
+
+				<!-- Button -->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="singlebutton"> </label>
+					<div class="col-md-4">
+						<button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit</button>
+					</div>
+				</div>
+
+			</fieldset>
+		</form>
+	</div>
+<!--</div>-->
+
+{% endblock %}

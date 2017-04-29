@@ -1,6 +1,6 @@
 from django.conf.urls import *
 from django.contrib import admin
-import social.urls
+import university.urls
 
 admin.autodiscover()
 
@@ -15,5 +15,7 @@ urlpatterns = [
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
     # url(r'^hello/', 'social.view.hello', name='hello'),
-    url(r'^social/', include(social.urls))
+    url(r'^social/', include(university.urls)),
+    url(r'^comments/', include('django_comments.urls')),
+
 ]
