@@ -14,22 +14,34 @@ class Program(models.Model):
     code = models.CharField(max_length = 10)
     year = models.IntegerField()
 
+    def __str__(self):
+        return self.name
+
 class Department(models.Model):
     name = models.CharField(max_length = 100)
     code = models.CharField(max_length = 5)
     budget = models.IntegerField(verbose_name = "Department Bedget")
     building = models.CharField(max_length = 10)
 
+    def __str__(self):
+        return self.name
+
 class Semester(models.Model):
     code = models.IntegerField(verbose_name = "Semester Code")
     dept = models.ForeignKey(Department)
     credit = models.IntegerField()
+
+    def __str__(self):
+        return self.code
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     fathers_name = models.CharField(max_length = 100, verbose_name = "Father's Name")
     present_address = models.CharField(max_length = 200, default = "")
     permanent_address = models.CharField(max_length = 200, default = "")
+
+    def __str__(self):
+        return self.first_name + " " + self.last_name
 
 class Student(Profile):
     addmission_year = models.PositiveIntegerField()
@@ -43,6 +55,9 @@ class Student(Profile):
             courses.append(course.course)
         return courses
 
+    def comp(x, y):
+        return x.username > y.username
+
 class FaculyMember(Profile):
     department = models.ForeignKey(Department)
 
@@ -50,6 +65,9 @@ class Course(models.Model):
     name = models.CharField(max_length = 100)
     course_id = models.CharField(max_length = 20)
     provider_dept = models.ForeignKey(Department)
+
+    def __str__(self):
+        return self.name
 
 class CourseTaken(models.Model):
     student = models.ForeignKey(Student)

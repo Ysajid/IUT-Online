@@ -141,6 +141,8 @@ TEMPLATES = [
 ]
 
 INSTALLED_APPS = (
+    # 'jet.dashboard',
+    'jet',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',

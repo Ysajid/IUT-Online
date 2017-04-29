@@ -7,6 +7,9 @@ from django.contrib.auth.models import User
 class Group(models.Model):
     name = models.CharField(max_length = 100)
 
+    def __str__(self):
+        return self.name
+
     @staticmethod
     def get_groups(user=None):
         if user is None:
@@ -29,6 +32,9 @@ class UsersInGroup (models.Model):
     group = models.ForeignKey(Group)
     user = models.ForeignKey(User)
     date_joined = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.user.username + " joioned in " + self.group.name + " on " +self.date_joined
 
 
 class Post(models.Model):

@@ -1,52 +1,67 @@
-{% extends 'base.html' %} {% block left-nav %}
-
-<ul class="group_list">
-	{% for group in groups %}
-	<a {% if group == current_group %} class="selected" {% endif %} href="{% url 'posts' group.pk %}">
-		<li>{{ group.name }}</li>
-	</a>
-	{% endfor %}
-</ul>
-
-{% endblock %} {% block content %}
+{% extends 'base.html' %} 
 
 
-<div class="main-container">
-	{% if user %}
-	<div class="feed">
-		{% if current_group %}
-		<div class="compose">
-			<form id="compose-form" action="{% url 'post' %}" method="POST">
-				<input type="hidden" value="{{ current_group.pk }}" name="group" />
-				<div class="form-group">
-					<textarea placeholder="Something important..." class="form-control" rows="3" name="body"></textarea> {% csrf_token %}
-				</div>
-				<div class="form-group" style="overflow:hidden;">
-					<button type="submit" class="btn btn-primary btn-post pull-right">
-					<span class="glyphicon glyphicon-send"></span> Post
-					</button>
-					<button type="button" class="btn btn-default btn-cancel-compose pull-right">Cancel</button>
-				</div>
-			</form>
+
+
+{% block content %}
+
+
+<div class="col-md-3 side-nav left-nav">
+	{% block left-nav %} 
+	
+	<ul class="group_list">
+		{% for group in groups %}
+		<a {% if group == current_group %} class="selected" {% endif %} href="{% url 'posts' group.pk %}">
+			<li>{{ group.name }}</li>
+		</a>
+		{% endfor %}
+	</ul>
+
+	{% endblock %}
+</div>
+
+<div class="col-md-offset-3 col-md-6">
+	<div class="main-container">
+		{% if user %}
+		<div class="feed">
+			{% if current_group %}
+			<div class="compose">
+				<form id="compose-form" action="{% url 'post' %}" method="POST">
+					<input type="hidden" value="{{ current_group.pk }}" name="group" />
+					<div class="form-group">
+						<textarea placeholder="Something important..." class="form-control" rows="3" name="body"></textarea> {% csrf_token %}
+					</div>
+					<div class="form-group" style="overflow:hidden;">
+						<button type="submit" class="btn btn-primary btn-post pull-right">
+						<span class="glyphicon glyphicon-send"></span> Post
+						</button>
+						<button type="button" class="btn btn-default btn-cancel-compose pull-right">Cancel</button>
+					</div>
+				</form>
+			</div>
+			{% endif %} {% if all_posts %} {% for post in all_posts %}
+			<div class="post">
+				<h5><a>{{ post.user.first_name}} {{post.user.last_name}}</a href="{% url 'posts' post.group.pk %}"> posted in <a>{{ post.group.name }}</a>
+				<span style="color:coral" class="glyphicon glyphicon-bookmark pull-right"></span>
+				</h5>
+				<p class="date">{{ post.post_date }}</p>
+				<p class="text">{{ post.body }}</p>
+				<form class="comment-form">
+					<textarea rows="1" placeholder="write a comment"></textarea>
+				</form>
+			</div>
+			{% endfor %} {% else %}
+			<p>No posts are available.</p>
+			{% endif %}
+
+
 		</div>
-		{% endif %} {% if all_posts %} {% for post in all_posts %}
-		<div class="post">
-			<h5><a>{{ post.user.first_name}} {{post.user.last_name}}</a href="{% url 'posts' post.group.pk %}"> posted in <a>{{ post.group.name }}</a>
-			<span style="color:coral" class="glyphicon glyphicon-bookmark pull-right"></span>
-			</h5>
-			<p class="date">{{ post.post_date }}</p>
-			<p class="text">{{ post.body }}</p>
-			<form class="comment-form">
-				<textarea rows="1" placeholder="write a comment"></textarea>
-			</form>
-		</div>
-		{% endfor %} {% else %}
-		<p>No posts are available.</p>
-		{% endif %}
-
 
 	</div>
-
 </div>
-<!--</div>-->
+
+
+<div class="col-md-3 side-nav right-nav">
+	asdfsd
+</div>
 {% else %} {% endif %} {% endblock %}

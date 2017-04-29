@@ -42,9 +42,10 @@ def register_user(request):
 		students = Student.objects.filter(addmission_year = addmission_year, department = department, program = program)
 
 		if(students.count() != 0):
-			username = 
+			username = str(int(max(students[students.comp()])) + 1)
+		else :
+			username = addmission_year[2:] + str(department.pk) + str(program.pk) + "01"
 
-		if()
 		username = request.POST.get("addmission_year")[2:] + request.POST.get("department") + str(Program.objects.get(pk = request.POST.get("program")).year) + str(Student.objects.filter(addmission_year = request.POST.get("addmission_year")).count() + 1)
 		first_name = request.POST.get("first_name")
 		last_name = request.POST.get("last_name")
@@ -75,8 +76,8 @@ def register_user(request):
 		student.department = Department.objects.get(pk = request.POST.get("department"))
 		student.save()
 
-		user = authenticate(username=user, password=user.password)
-		login(request, user)
+		# user = authenticate(username=user, password=user.password, email = email)
+		# login(request, user)
 
 		return redirect('home')
 

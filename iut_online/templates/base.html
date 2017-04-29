@@ -28,7 +28,7 @@
 
 					<ul class="nav navbar-nav">
                         {% if perms.groups %}
-						<li><a>An item</a></li>
+						<li><a href="{% url 'admin:index' %}">Manage Board</a></li>
                         {% endif %}
 						<li><a>An item2</a></li>
 					</ul>
@@ -68,16 +68,7 @@
 
 	<div class="container">
 		<div class="row">
-
-			<div class="col-md-3 side-nav left-nav">
-				{% block left-nav %} {% endblock %}
-			</div>
-			<div class="col-md-offset-3 col-md-6">
-				{% block content %} {% endblock %}
-			</div>
-			<div class="col-md-3 side-nav right-nav">
-				asdfsd
-			</div>
+			{% block content %} {% endblock %}
 		</div>
 	</div>
 

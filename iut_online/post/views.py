@@ -40,3 +40,9 @@ def posts(request, group_pk):
 		'groups' : groups,
 	})
 
+def groups(request):
+	groups = Group.get_groups()
+
+	return render(request, 'manage.html', {
+		'groups' : groups,
+	})
