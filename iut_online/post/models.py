@@ -15,13 +15,22 @@ class Group(models.Model):
         if user is None:
             return Group.objects.all()
         else:
-            return Group.objects.filter(user = user)
+            group_rels = UsersInGroup.objects.filter(user = user)
+            groups = []
+            for rel in group_rels:
+                groups.append(rel.group)
+
+            return groups
 
     def get_users(self):
         users = []
         for rel in UsersInGroup.objects.filter(group = self):
             users.append(rel.user)
         return users
+    
+    def has_user(self, user):
+        rel = UsersInGroup.objects.filter(user = user, group = self)
+        return rel
 
     def add_user(self, user):
         rel = UsersInGroup(group = self, user = user)
@@ -34,7 +43,7 @@ class UsersInGroup (models.Model):
     date_joined = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return self.user.username + " joioned in " + self.group.name + " on " +self.date_joined
+        return self.user.username + " joioned in " + self.group.name + " on " + str(self.date_joined)
 
 
 class Post(models.Model):
@@ -78,8 +87,7 @@ class Post(models.Model):
     #     return feeds
 
     def get_comments(self):
-        return Activity.objects.filter(activity_type=Activity.COMMENT,
-                                        post=self.pk)
+        return Comment.objects.filter(post = self)
 
     def calculate_comments(self):
         self.comments = Feed.objects.filter(parent=self).count()

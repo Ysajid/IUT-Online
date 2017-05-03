@@ -1,0 +1,152 @@
+body {
+    background: #efefef;
+    height: 100%;
+    width: 100%;
+}
+
+a {
+    cursor: pointer;
+    color:dodgerblue;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.navbar {
+    border-radius: 0px; 
+}
+
+.main-container{
+    padding-top: 16px;
+}
+
+.icon-bar {
+    height: 8px;
+    width: 60px;
+}
+
+.feed {
+    /*display: inline-block;*/
+    width: 100%;
+}
+
+.post {
+    background: #fff;
+    padding:16px;
+    margin-bottom:16px;
+    font-family:sans;
+    border-radius: 4px;
+    font-size: 10px;
+    box-shadow: 0px 1px 1px 1px rgba(0,0,0,.1);
+}
+
+.post .text {
+    margin-top: 8px;
+    font-size: medium;
+    font-family: sans-serif;
+}
+
+.post h5{
+    font-size: 14px;
+    margin: 0px;
+}
+
+.date{
+    font-size:4px;
+    color: #aaa;
+}
+
+.post textarea{
+    resize: none;
+    width: 100%;
+    border: 1px solid #efefef;
+    -webkit-user-drag: none;
+    padding: 4px;
+}
+
+.quiz{
+    border: 1px solid coral;
+}
+
+.side-nav {
+    position: fixed;
+    height: 100%;
+    width: 16.7%;
+    top: 50px;
+    padding: 16px;
+}
+
+.left-nav{
+    left:0px;
+}
+
+.right-nav {
+    right: 0px;
+    width: 34%;
+}
+
+.textarea{
+    resize:none;
+}
+
+.container {
+    padding-top: 50px;
+    width:100%;
+}
+
+.group_list {
+    float: right;
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.group_list li{
+    padding: 8px;
+    font-size: small;
+    color: gray;
+    text-align: right;
+}
+
+.group_list li:hover {
+    background:  whitesmoke;
+    color: black;
+}
+
+.group_list li.selected {
+    background: #222222;
+    color: white;
+    border-radius: 4px;
+}
+
+.calender {
+    background: #fff;
+    padding: 8px;
+    font-family:sans;
+    border-radius: 4px;
+    font-size: 10px;
+    box-shadow: 0px 1px 1px 1px rgba(0,0,0,.1);
+}
+
+.comments{
+    padding: 8px;
+    background: rgba(0,0,0,.03);
+}
+
+.comments ul{
+    padding: 0px;
+    margin: 0px;
+}
+
+.comments li {
+    padding: 4px;
+    margin-top: 4px;
+    list-style-type: none;
+}
+
+.comments input {
+    background: none;
+    box-shadow: inset 0px 1px 0px 1px rgba(0,0,0,.03) ;
+    border: none;
+}

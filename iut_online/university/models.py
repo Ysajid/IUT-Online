@@ -35,18 +35,26 @@ class Semester(models.Model):
         return self.code
 
 class Profile(models.Model):
+    STUDENT = 'S'
+    FACULTY = 'F'
+    PROFILE_TYPES = (
+        (STUDENT, 'Student'),
+        (FACULTY, "Faculty Member")
+    )
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    type = models.CharField(max_length = 1, choices = PROFILE_TYPES)
     fathers_name = models.CharField(max_length = 100, verbose_name = "Father's Name")
     present_address = models.CharField(max_length = 200, default = "")
     permanent_address = models.CharField(max_length = 200, default = "")
 
     def __str__(self):
-        return self.first_name + " " + self.last_name
+        return self.user.first_name + " " + self.user.last_name
 
 class Student(Profile):
     addmission_year = models.PositiveIntegerField()
     current_sem = models.IntegerField(max_length=8)
     department = models.ForeignKey(Department)
+    program = models.ForeignKey(Program)
 
     def get_courses(self):
         taken = CourseTaken.objects.filter(student = self, semester = self.current_sem)

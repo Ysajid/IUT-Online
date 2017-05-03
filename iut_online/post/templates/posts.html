@@ -1,0 +1,111 @@
+{% extends 'base.html' %} {% block left-nav %} {% endblock %} {% block content%}
+
+<div class="col-md-6 col-md-offset-2">
+	<div class="main-container">
+		<div class="feed">
+			<div id="id_compose_post" class="compose post">
+				<form id="compose-form" action="{% url 'post' %}" method="POST">
+					<input type="hidden" value="{{ current_group.pk }}" name="group" />.
+					<div class="form-group">
+						<textarea id="id_post_body" placeholder="Something important..." class="form-control" rows="3" name="body"></textarea>						
+						{% csrf_token%}
+					</div>
+						{% if user.profile.type == 'F' %}
+					<!--<div id="id_datetime" class="row">
+						<div class="col-md-3 control-label text-right">
+							<label for="datetime">Date and time :</label>
+						</div>
+						<div class="col-md-3">
+							<input id="datetime" type="datetime" name="datetime" class="form-control input-sm" placeholder="dd/mm hh:mm" />
+						</div>
+					</div>-->
+					<!--<br/>-->
+						{% endif %}
+					<div class="row">
+						{% if user.profile.type == 'F' %}
+						<div class="col-md-3">
+							<select id="id_types" class="form-control" name="type" onchange="typeChanged(this);">
+                                {% for key,val in types %}
+                                <option value="{{ key }}">{{ val }}</option>
+                                {% endfor %}
+                            </select>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+								<div class="input-group date" id="id_datetime">
+									<input class="form-control" type="text" name="datetime">
+									<span class="input-group-addon">
+										<span class="glyphicon glyphicon-calendar"></span>
+									</span>
+								</div>
+							</div>
+						</div>
+						<script type="text/javascript">
+							$(function () {
+								$('#id_datetime').datetimepicker({
+                					daysOfWeekDisabled: [0, 6]
+								});
+							});
+						</script>
+						{% endif %}
+						<div class="col-md-6 {% if user.profile.type != 'F' %}col-md-offset-6{% endif %} text-right">
+							<div class="form-group">
+								<button type="submit" class="btn btn-primary btn-post">Post </button>
+								<button type="button" class="btn btn-default btn-cancel-compose">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			{% if all_posts %} {% for post in all_posts %}
+			<div class="post {% if post.type != 'G' %} quiz {% endif %} ">
+				<h5><a>{{ post.user.first_name}} {{post.user.last_name}}</a href="{% url 'posts' post.group.pk %}"> posted in <a>{{ post.group.name }}</a>					
+				{% if post.type != 'G' %}
+				<span style="color:coral;font-size:1.5em;" class="glyphicon glyphicon-star pull-right"></span>
+				{% endif %}
+				</h5>
+				<p class="date">{{ post.post_date }}</p>
+				<p class="text">{{ post.body }}</p>
+				<div class="comments">
+					<form role="form" method="post" action="{% url 'comment' %}">
+						{% csrf_token %}
+						<input type="hidden" name="post" value="{{ post.pk }}">
+						<input type="text" class="form-control input-sm" placeholder="Write a comment..." name="text" maxlength="255">
+					</form>
+					<ul>
+						{% for comment in post.get_comments %}
+						<li>
+							<h5><a href="#">{{ comment.user.first_name}} {{comment.user.last_name}}</a><small> [{{ comment.date|date:"M d" }}] : </small>								
+							{{ comment.text }}
+							</h5>
+						</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+
+			{% endfor %} {% else %}
+			<p class="text-center">No posts are available.</p>
+			{% endif %}
+
+
+		</div>
+
+	</div>
+</div>
+
+
+{% block right-nav %} 
+<div class="side-nav right-nav">
+	<div class="calender">
+	{{ calender }}
+	</div>
+</div>
+{% endblock %}
+
+
+{% load static %}
+<script src="{% static 'js/post.js' %}"></script>
+<script src="{% static 'js/calender.js' %}"></script>
+{% endblock %}
