@@ -23,7 +23,7 @@ Publisher communities provide content and app partners an opportunity to engage 
 
 
 
-[Social Features](�https://www.tapglue.com/blog/social-features/)
+[Social Features](https://www.tapglue.com/blog/social-features/)
 
 ## User Profiles
 Improves individual identity and credibility with other users
