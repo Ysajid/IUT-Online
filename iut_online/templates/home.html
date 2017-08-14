@@ -1,54 +1,57 @@
 {% extends 'base.html' %} 
 
 
+{% block left-nav %} 
 
-
-{% block content %}
-
-
-<div class="col-md-3 side-nav left-nav">
-	{% block left-nav %} 
-	
+<div class="side-nav left-nav">
 	<ul class="group_list">
 		{% for group in groups %}
-		<a {% if group == current_group %} class="selected" {% endif %} href="{% url 'posts' group.pk %}">
-			<li>{{ group.name }}</li>
+		<a href="{% url 'posts' group.pk %}">
+			<li {% if group == current_group %} class="selected" {% endif %} >{{ group.name }}</li>
 		</a>
 		{% endfor %}
 	</ul>
-
-	{% endblock %}
 </div>
 
-<div class="col-md-offset-3 col-md-6">
+{% endblock %}
+
+{% block content %}
+
+<div class="col-md-6 col-md-offset-2">
 	<div class="main-container">
 		{% if user %}
 		<div class="feed">
-			{% if current_group %}
-			<div class="compose">
-				<form id="compose-form" action="{% url 'post' %}" method="POST">
-					<input type="hidden" value="{{ current_group.pk }}" name="group" />
-					<div class="form-group">
-						<textarea placeholder="Something important..." class="form-control" rows="3" name="body"></textarea> {% csrf_token %}
-					</div>
-					<div class="form-group" style="overflow:hidden;">
-						<button type="submit" class="btn btn-primary btn-post pull-right">
-						<span class="glyphicon glyphicon-send"></span> Post
-						</button>
-						<button type="button" class="btn btn-default btn-cancel-compose pull-right">Cancel</button>
-					</div>
-				</form>
-			</div>
-			{% endif %} {% if all_posts %} {% for post in all_posts %}
-			<div class="post">
-				<h5><a>{{ post.user.first_name}} {{post.user.last_name}}</a href="{% url 'posts' post.group.pk %}"> posted in <a>{{ post.group.name }}</a>
-				<span style="color:coral" class="glyphicon glyphicon-bookmark pull-right"></span>
+			
+			{% if all_posts %} {% for post in all_posts %}
+			<div class="post  {% if post.type != 'G' %} quiz {% endif %} ">
+				<h5><a>{{ post.user.first_name}} {{post.user.last_name}}</a href="{% url 'posts' post.group.pk %}"> posted in <a>{{ post.group.name }}</a></h5>
+				{% if post.type != 'G' %}
+				<span style="color:coral;font-size:1.5em;" class="glyphicon glyphicon-star pull-right" ></span>
+				{% endif %}
 				</h5>
 				<p class="date">{{ post.post_date }}</p>
 				<p class="text">{{ post.body }}</p>
-				<form class="comment-form">
-					<textarea rows="1" placeholder="write a comment"></textarea>
-				</form>
+				
+				<a class="btn-default"><i class="glyphicon glyphicon-chevron-up"></i> {{ post.like_cnt }}</a>
+				<a class="btn-default"><i class="glyphicon glyphicon-chevron-down"></i> 6</a>
+				<a id="comment" class="btn-default"><i class="glyphicon glyphicon-comment"></i> Comment</a>
+
+				<div class="comments">
+					<form  role="form" method="post" action="{% url 'comment' %}">
+						{% csrf_token %}
+						<input type="hidden" name="post" value="{{ post.pk }}">
+						<input type="text" class="form-control input-md" placeholder="write a comment..." name="text" maxlength="255">
+					</form>
+					<ul>
+					{% for comment in post.get_comments %}
+						<li>
+							<h5><a href="#">{{ comment.user.first_name}}</a><small> [{{ comment.date|date:"M d" }}] : </small>
+							{{ comment.text }}
+                            </h5>
+						</li>
+					{% endfor %}
+					</ul>
+				</div>
 			</div>
 			{% endfor %} {% else %}
 			<p>No posts are available.</p>
@@ -60,8 +63,13 @@
 	</div>
 </div>
 
-
-<div class="col-md-3 side-nav right-nav">
-	asdfsd
-</div>
 {% else %} {% endif %} {% endblock %}
+
+
+{% block right-nav %} 
+<div class="side-nav right-nav">
+	<div class="calender">
+	{{ calendar }}
+	</div>
+</div>
+{% endblock %}

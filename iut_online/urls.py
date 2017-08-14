@@ -1,5 +1,6 @@
 from django.conf.urls import *
 from django.contrib import admin
+from django.contrib.auth.views import LoginView, LogoutView
 import university.urls
 
 admin.autodiscover()
@@ -21,5 +22,6 @@ urlpatterns = [
     # url(r'^hello/', 'social.view.hello', name='hello'),
     url(r'^social/', include(university.urls)),
     url(r'^comments/', include('django_comments.urls')),
+    url(r'^logout/$', LogoutView.as_view(next_page = 'login') , name="logout"),
 
 ]

@@ -1,0 +1,40 @@
+.calender table {
+    width: 100%;
+}
+
+.calender table tr th {
+    text-align: center;
+    font-size: 16px;
+    background-color: #222222;
+    color: #fff;
+}
+
+.calender table tr td {
+    width: 10%;
+    border: 1px solid #555;
+    vertical-align: top;
+    height: 60px;
+    padding: 2px;
+}
+
+.calender td.noday {
+    background-color: #eee;
+}
+
+.calender td.filled {
+    border: 2px solid coral;
+}
+
+.calender td.today {
+    background: #222222;
+    color: #fff;
+}
+
+.calender .dayNumber {
+    font-size: 16px !important;
+    font-weight: bold;
+}
+
+.calender a {
+    font-size: 10px;
+}
